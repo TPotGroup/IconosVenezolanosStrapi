@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "postcards",
+  "info": {
+    "singularName": "postcard",
+    "pluralName": "postcards",
+    "displayName": "Postcard"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}
