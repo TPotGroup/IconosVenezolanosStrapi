@@ -32,14 +32,14 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "postcards"
     },
-    "image": {
-      "allowedTypes": [
-        "images"
-      ],
+    "imagenPostal": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "private": true
+      "private": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
