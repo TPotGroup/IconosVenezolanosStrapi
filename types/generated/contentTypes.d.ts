@@ -421,7 +421,7 @@ export interface ApiPostcardPostcard extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
-    imagenPostal: Attribute.Media & Attribute.Required & Attribute.Private;
+    postal: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
