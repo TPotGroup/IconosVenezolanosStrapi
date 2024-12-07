@@ -4,7 +4,8 @@
   "info": {
     "singularName": "postcard",
     "pluralName": "postcards",
-    "displayName": "Postcard"
+    "displayName": "Postcard",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,30 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "Description": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "postcards"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "postcards"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "private": true
     }
   }
 }

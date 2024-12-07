@@ -362,18 +362,66 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiPostcardPostcard extends Schema.CollectionType {
-  collectionName: 'postcards';
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
   info: {
-    singularName: 'postcard';
-    pluralName: 'postcards';
-    displayName: 'Postcard';
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    postcards: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::postcard.postcard'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostcardPostcard extends Schema.CollectionType {
+  collectionName: 'postcards';
+  info: {
+    singularName: 'postcard';
+    pluralName: 'postcards';
+    displayName: 'Postcard';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Description: Attribute.String;
+    categories: Attribute.Relation<
+      'api::postcard.postcard',
+      'manyToMany',
+      'api::category.category'
+    >;
+    users_permissions_users: Attribute.Relation<
+      'api::postcard.postcard',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    image: Attribute.Media & Attribute.Required & Attribute.Private;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -754,6 +802,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    postcards: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::postcard.postcard'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -828,6 +881,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::category.category': ApiCategoryCategory;
       'api::postcard.postcard': ApiPostcardPostcard;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
