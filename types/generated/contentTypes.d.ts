@@ -422,6 +422,11 @@ export interface ApiPostcardPostcard extends Schema.CollectionType {
       'plugin::users-permissions.user'
     >;
     postal: Attribute.Media & Attribute.Required;
+    send_postcards: Attribute.Relation<
+      'api::postcard.postcard',
+      'oneToMany',
+      'api::send-postcard.send-postcard'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -433,6 +438,44 @@ export interface ApiPostcardPostcard extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::postcard.postcard',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSendPostcardSendPostcard extends Schema.CollectionType {
+  collectionName: 'send_postcards';
+  info: {
+    singularName: 'send-postcard';
+    pluralName: 'send-postcards';
+    displayName: 'SendPostcard';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    send: Attribute.DateTime & Attribute.Required;
+    postcard: Attribute.Relation<
+      'api::send-postcard.send-postcard',
+      'manyToOne',
+      'api::postcard.postcard'
+    >;
+    mensaje: Attribute.String & Attribute.Required;
+    emailTo: Attribute.Email & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::send-postcard.send-postcard',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::send-postcard.send-postcard',
       'oneToOne',
       'admin::user'
     > &
@@ -883,6 +926,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::category.category': ApiCategoryCategory;
       'api::postcard.postcard': ApiPostcardPostcard;
+      'api::send-postcard.send-postcard': ApiSendPostcardSendPostcard;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

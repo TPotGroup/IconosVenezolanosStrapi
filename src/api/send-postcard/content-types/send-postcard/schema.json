@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "send_postcards",
+  "info": {
+    "singularName": "send-postcard",
+    "pluralName": "send-postcards",
+    "displayName": "SendPostcard",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "send": {
+      "type": "datetime",
+      "required": true
+    },
+    "postcard": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::postcard.postcard",
+      "inversedBy": "send_postcards"
+    },
+    "mensaje": {
+      "type": "string",
+      "required": true
+    },
+    "emailTo": {
+      "type": "email",
+      "unique": false,
+      "required": true
+    }
+  }
+}
