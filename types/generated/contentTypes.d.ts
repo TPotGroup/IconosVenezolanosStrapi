@@ -470,6 +470,9 @@ export interface ApiSendPostcardSendPostcard extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    status: Attribute.Enumeration<['pending', 'sent', 'failed']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'pending'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

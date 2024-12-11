@@ -36,6 +36,16 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "send_postcards"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "sent",
+        "failed"
+      ],
+      "required": true,
+      "default": "pending"
     }
   }
 }
