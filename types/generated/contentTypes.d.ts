@@ -465,6 +465,11 @@ export interface ApiSendPostcardSendPostcard extends Schema.CollectionType {
     >;
     mensaje: Attribute.String & Attribute.Required;
     emailTo: Attribute.Email & Attribute.Required;
+    users_permissions_user: Attribute.Relation<
+      'api::send-postcard.send-postcard',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -849,6 +854,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToMany',
       'api::postcard.postcard'
+    >;
+    send_postcards: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::send-postcard.send-postcard'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

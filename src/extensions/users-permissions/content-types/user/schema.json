@@ -71,6 +71,12 @@
       "relation": "manyToMany",
       "target": "api::postcard.postcard",
       "mappedBy": "users_permissions_users"
+    },
+    "send_postcards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::send-postcard.send-postcard",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
